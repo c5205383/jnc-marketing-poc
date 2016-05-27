@@ -164,7 +164,7 @@
 					<url>http://120.76.155.38:8082/manager/text</url>
 					<username>tomcat</username>
 					<password>s3cret</password>
-					<path>/tomcattest</path>
+					<path>/jnc</path>
 				</configuration>
 			</plugin>
 		</plugins>
