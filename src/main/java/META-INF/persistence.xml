@@ -3,7 +3,6 @@
 	
 	<persistence-unit name="HcpDefaultPersistenceUnit">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>com.sap.jnc.marketing.persistence.models.Account</class>
 		
 		<properties>
 			<property name="eclipselink.ddl-generation" value="none"/>
