@@ -40,7 +40,8 @@ public class WeChatController {
 	}
 
 	@RequestMapping(value = "/wechatadaptor", method = { RequestMethod.POST, RequestMethod.GET })
-	public void AndyTest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void AndyTest(HttpServletRequest request, HttpServletResponse response) {
+		try{
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String currentDate = new Date().toString();
@@ -89,17 +90,20 @@ public class WeChatController {
 
 					}
 				}
+				if ("".equals(result.trim())) {
+					result = "谢谢关注剑南春。";
+				}
+				result = new WeChatAutoResponse().response(xml, result);
 			}
 
-			if ("".equals(result.trim())) {
-				result = "谢谢关注剑南春。";
-			}
-			result = new WeChatAutoResponse().response(xml, result);
 		}
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		out.close();
 		out = null;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }
