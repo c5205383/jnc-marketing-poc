@@ -19,8 +19,6 @@ import com.sap.jnc.marketing.web.interceptors.CustomizedHandlerInterceptor;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-	private static final int MAX_UPLOAD_SIZE = 4 * 1024 * 1024;
-
 	@Autowired
 	protected InitialContext initialContext;
 

@@ -111,6 +111,19 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.1.3.Final</version>
 		</dependency>
+		<!-- http://mvnrepository.com/artifact/dom4j/dom4j -->
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sap.db.jdbc</groupId>
+			<artifactId>ngdbc</artifactId>
+			<version>1.111.2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/resources/WEB-INF/lib/ngdbc-1.111.2.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>jnc-marketing</finalName>
@@ -128,10 +141,44 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<!-- <warSourceDirectory>src/main/webapp</warSourceDirectory> -->
+					<webResources>
+						<resource>
+							<directory>${project.basedir}/src/main/resources/WEB-INF/lib</directory>
+							<targetPath>WEB-INF/lib</targetPath>
+							<filtering>false</filtering>
+							<includes>
+								<include>**/*.jar</include>
+							</includes>
+						</resource>
+					</webResources>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<!-- <url>http://localhost:8081/manager/text</url> -->
+					<!-- <server>tomcat</server> -->
+					<url>http://120.76.155.38:8082/manager/text</url>
+					<username>tomcat</username>
+					<password>s3cret</password>
+					<path>/jnc</path>
+				</configuration>
+			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
 	</build>
 </project>
