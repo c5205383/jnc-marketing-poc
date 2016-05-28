@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sap.jnc.marketing.persistence.models.Wine;
@@ -39,8 +40,8 @@ public class WeChatController {
 		return wine;
 	}
 
-	@RequestMapping(value = "/wechatadaptor", method = { RequestMethod.GET, RequestMethod.POST })
-	public void AndyTest(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/wechatadaptor", method = { RequestMethod.GET, RequestMethod.POST },produces = "text/plain")
+	public @ResponseBody String AndyTest(HttpServletRequest request) {
 		String currentDate = new Date().toString();
 		System.out.println(currentDate);
 
@@ -101,16 +102,6 @@ public class WeChatController {
 				e.printStackTrace();
 			}
 		}
-		if (result != null && !"".equals(result.trim())) {
-			OutputStream osResult;
-			try {
-				osResult = response.getOutputStream();
-				osResult.write(result.getBytes("UTF-8"));
-				osResult.flush();
-				osResult.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		return result;
 	}
 }
